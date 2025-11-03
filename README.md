@@ -10,9 +10,9 @@ This is a very basic Project Arrhythmia mod that attempts to fix the player visu
 1. Remove the `DelayTracker` component from the player.
 2. Add the following code to the bottom of the `Update` method of the `VGPlayer` class:
   ```cs
-  const var rotateSpeed = 40f;
-  const var followSpeed = 10f;
-  const var edgeSpeed = 25f;
+  const float rotateSpeed = 40f;
+  const float followSpeed = 10f;
+  const float edgeSpeed = 25f;
 		
   var positionDelta = (Vector3)this.internalVelocity;
   var rotationDelta = Quaternion.Euler(0f, 0f, this.Player_Rigidbody.transform.eulerAngles.z);
@@ -23,12 +23,12 @@ This is a very basic Project Arrhythmia mod that attempts to fix the player visu
   ```
 3. Add the following code to the bottom of the `LateUpdate` method of the `VGPlayer` class:
   ```cs
-  const var rotateSpeed = 40f;
-  const var followSpeed = 10f;
-  const var edgeSpeed = 25f;
+  const float rotateSpeed = 40f;
+  const float followSpeed = 10f;
+  const float edgeSpeed = 25f;
 
   var visual = this.transform.Find("Player");
-  visual.position = Vector3.Lerp(visual.position, this.Player_Rigidbody.transform, Time.deltaTime * followSpeed);
+  visual.position = Vector3.Lerp(visual.position, this.Player_Rigidbody.transform.position, Time.deltaTime * followSpeed);
 
   var vector = this.ObjectCamera.WorldToViewportPoint(visual.position);
   var edgeOffset = VGPlayer.EDGE_OFFSET;
