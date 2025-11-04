@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using Il2CppInterop.Runtime.Injection;
@@ -10,18 +11,15 @@ public class Plugin : BasePlugin
 {
     private const string Guid = "com.enchart.AlternativeSmoothPlayer";
     private const string Name = "AlternativeSmoothPlayer";
+    
+    internal new static ManualLogSource Log { get; private set; }
 
     public override void Load()
     {
+        Log = base.Log;
         Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
-        RegisterTypes();
 
         var harmony = new Harmony(Guid);
         harmony.PatchAll();
-    }
-
-    private static void RegisterTypes()
-    {
-        ClassInjector.RegisterTypeInIl2Cpp<VgPlayerFix>();
     }
 }
