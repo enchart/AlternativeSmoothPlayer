@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using VGPlayerData = VGPlayerManager.VGPlayerData;
+using static VGPlayerManager;
 
 namespace AlternativeSmoothPlayer;
 

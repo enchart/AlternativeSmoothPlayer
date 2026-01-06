@@ -1,24 +1,22 @@
-﻿using BepInEx;
+﻿using System.Reflection;
+using BepInEx;
 using BepInEx.Logging;
-using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 
 namespace AlternativeSmoothPlayer;
 
-[BepInPlugin(Guid, Name, MyPluginInfo.PLUGIN_VERSION)]
-public class Plugin : BasePlugin
+[BepInPlugin(Guid, "AlternativeSmoothPlayer", MyPluginInfo.PLUGIN_VERSION)]
+public class Plugin : BaseUnityPlugin
 {
     private const string Guid = "com.enchart.AlternativeSmoothPlayer";
-    private const string Name = "AlternativeSmoothPlayer";
     
-    internal new static ManualLogSource Log { get; private set; }
-
-    public override void Load()
+    internal new static ManualLogSource Logger;
+        
+    private void Awake()
     {
-        Log = base.Log;
-        Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+        Logger = base.Logger;
+        Logger.LogInfo($"Plugin {Guid} is loaded!");
 
-        var harmony = new Harmony(Guid);
-        harmony.PatchAll();
+        Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), Guid);
     }
 }
